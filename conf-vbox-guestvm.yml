@@ -1,0 +1,15 @@
+---
+centos_base: &CENT_BASE
+    box:                     geerlingguy/centos6
+    os_type:                 linux
+
+guestvm:
+  - name:                    mygitlab
+    ipaddress:               192.168.33.131
+    ansible_playbook:        install_gitlab_mattermost_without_proxy.yml
+    << : *CENT_BASE
+
+  - name:                    myjenkins
+    ipaddress:               192.168.33.132
+    ansible_playbook:        install_jenkins_without_proxy.yml
+    << : *CENT_BASE

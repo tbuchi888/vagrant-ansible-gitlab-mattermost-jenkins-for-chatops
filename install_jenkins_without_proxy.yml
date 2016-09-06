@@ -1,0 +1,57 @@
+---
+# Please use the OS of centOS6 and RHEL6. Also, please use in an environment that does not care about the HTTP_PROXY.
+# yumrepo module you can use in Ansible version 2.1 or higher. 
+# In the case of Ansible version 2.0 or less, and then comment out the yumrepo block, 
+# please remove the comment "download jenkins.repo" and "rpm import jenkins-ci.org.key".
+
+- hosts: all
+  become: yes
+  become_method: sudo
+  become_user: root
+  gather_facts: no
+
+# Setting the task
+  tasks:
+    - name: Add jenkins repo
+      yum_repository: 
+        name: jenkins
+        description: jenkins yum repo
+        baseurl: http://pkg.jenkins-ci.org/redhat
+        gpgcheck: yes
+        gpgkey: http://pkg.jenkins-ci.org/redhat/jenkins-ci.org.key
+
+#      - name: download jenkins.repo
+#        get_url: url=http://pkg.jenkins-ci.org/redhat/jenkins.repo dest=/etc/yum.repos.d/jenkins.repo
+#
+#      - name: rpm import jenkins-ci.org.key
+#        command: rpm --import http://pkg.jenkins-ci.org/redhat/jenkins-ci.org.key
+#        register: raw_result
+#      - debug: var=raw_result.stdout_lines
+
+    - name: yum install
+      yum: name={{item.name}} state={{item.state}}
+      register: yum_result
+      with_items:
+        - name: '*' 
+          state: latest
+        - name: openssh-server 
+          state: latest
+        - name: java-1.8.0-openjdk 
+          state: latest
+        - name: jenkins
+          state: latest
+    - debug: var=yum_result.results
+
+    - name: jenkins should have been running
+      service: name=jenkins state=started enabled=yes
+
+    - name: lokkit -p 8080:tcp
+      command: lokkit -p 8080:tcp
+      register: cmd_result
+    - debug: var=cmd_result.stdout_lines
+
+#    - name: cat initialAdminPassword for Unlock Jenkins
+#      command: cat /var/lib/jenkins/secrets/initialAdminPassword
+#      register: cmd_result
+#    - name: this is initialAdminPassword for Unlock Jenkins
+#      debug: var=cmd_result.stdout_lines

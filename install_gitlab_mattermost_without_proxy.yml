@@ -1,0 +1,68 @@
+---
+# Setting the destination inventory host
+- hosts: all
+  become: yes
+  become_method: sudo
+  become_user: root
+  
+# Don't gather hosts facts for performance
+  gather_facts: no
+
+# Setting the task
+  tasks:
+    - name: yum install
+      yum: name={{item.name}} state={{item.state}}
+      register: yum_result
+      with_items:
+        - name: '*' 
+          state: latest
+        - name: openssh-server 
+          state: latest
+        - name: curl 
+          state: latest
+        - name: postfix 
+          state: latest
+    - debug: var=yum_result.results
+
+    - name: postfix        should have been running
+      service: name=postfix state=started enabled=yes 
+
+    - name: lokkit -s http -s ssh 
+      command: lokkit -s http -s ssh -p 8080:tcp
+      register: cmd_result
+    - name: command STDOUT 
+      debug: var=cmd_result.stdout_lines
+
+    - name: shell curl gitlab script.rpm.sh
+      shell: curl -s https://packages.gitlab.com/install/repositories/gitlab/gitlab-ce/script.rpm.sh | sudo bash
+      register: shell_result
+    - name: command STDOUT 
+      debug: var=shell_result.stdout_lines
+
+    - name: gitlab-ce      should have been installed(latest)
+      yum: name=gitlab-ce state=latest
+
+    - name: command gitlab-ctl
+      shell: gitlab-ctl reconfigure
+      register: cmd_result
+    - name: command STDOUT 
+      debug: var=cmd_result.stdout_lines
+
+    - name: enable mattermost on port 9999
+# mattermost_external_url 'http://mattermost.example.com'
+
+      replace: dest=/etc/gitlab/gitlab.rb regexp='^# mattermost_external_url \'http\://mattermost\.example\.com\'$' replace='mattermost_external_url \'http://{{inventory_hostname}}:9999\''
+
+    - name: command gitlab-ctl
+      shell: gitlab-ctl reconfigure
+      register: cmd_result
+    - name: command STDOUT 
+      debug: var=cmd_result.stdout_lines
+
+    - name: lokkit -p 9999:tcp for mattermost
+      command: lokkit -p 9999:tcp
+      register: cmd_result
+    - debug: var=cmd_result.stdout_lines
+
+    - name: This is initial Password for root of Gitlab
+      debug: msg="The initial password of the root account is `5iveL!fe`."
