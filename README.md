@@ -26,11 +26,11 @@ I validated this repository in the following environment.
 ||CI Tool|Jenkins ver.2.19||
 
 ## Usage
-If you use Vagrant with Virtualbox and Ansible(ver.2.1 highre),
-you just run following commands.
+If you use Vagrant with Virtualbox and Ansible(higher ver.2.1 ),
+You only type to following in commands.
 
 ```
-git clone 
-cd 
+git clone https://github.com/tbuchi888/vagrant-ansible-gitlab-mattermost-jenkins-for-chatops.git
+cd vagrant-ansible-gitlab-mattermost-jenkins-for-chatops
 vagrant up
 ```
