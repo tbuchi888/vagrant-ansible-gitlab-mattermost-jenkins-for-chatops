@@ -20,14 +20,28 @@ I validated this repository in the following environment.
 ||building tool|Vagrant1.8.5||
 |||Ansible 2.1.0 update:2016/04/20|Because I use the yumrepository module, version 2.10 or more of Ansible are necessary.|
 |Gitlab and Mattermost Server|OS|CentOS6.8||
+||Host name|mygitlab|Change your environment|
+||IPaddress|192.168.33.131|Change your environment|
 ||Code managemnt tool|GitlabCE ver.8.11.2||
 ||Chat tool|Mattermost ver.3.30|on GitlabCE|
 |Jenkins2 Server|OS|CentOS6.8||
+||Host name|myjenkins|Change your environment|
+||IPaddress|192.168.33.132|Change your environment|
 ||CI Tool|Jenkins ver.2.19||
 
 ## Usage
 If you use Vagrant with Virtualbox and Ansible(higher ver.2.1 ),
 You only type to following in commands.
+
+Add hosts for these servers. 
+Example `sudo vi /etc/hosts`
+
+```
+192.168.33.131  mygitlab
+192.168.33.132  myjenkins
+```
+
+And then,
 
 ```
 git clone https://github.com/tbuchi888/vagrant-ansible-gitlab-mattermost-jenkins-for-chatops.git
