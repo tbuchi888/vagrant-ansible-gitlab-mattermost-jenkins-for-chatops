@@ -48,9 +48,9 @@
     - name: command STDOUT 
       debug: var=cmd_result.stdout_lines
 
-    - name: enable mattermost on port 9999
+# for Mattermost 
 # mattermost_external_url 'http://mattermost.example.com'
-
+    - name: enable mattermost on port 9999
       replace: dest=/etc/gitlab/gitlab.rb regexp='^# mattermost_external_url \'http\://mattermost\.example\.com\'$' replace='mattermost_external_url \'http://{{inventory_hostname}}:9999\''
 
     - name: command gitlab-ctl
@@ -64,5 +64,6 @@
       register: cmd_result
     - debug: var=cmd_result.stdout_lines
 
+# Reference information
     - name: This is initial Password for root of Gitlab
       debug: msg="The initial password of the root account is `5iveL!fe`."
