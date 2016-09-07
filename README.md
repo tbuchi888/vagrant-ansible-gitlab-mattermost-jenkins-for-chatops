@@ -29,8 +29,7 @@ I validated this repository in the following environment.
 ||IPaddress|192.168.33.132|Change your environment(*1)|
 ||CI Tool|Jenkins ver.2.19||
 
-*1:Change your environment, 
-Change your environment, `conf-vbox-guestvm.yml` and `/etc/hosts`.
+*1: Change your environment, `conf-vbox-guestvm.yml` and `/etc/hosts`.
 And then, if you only use Ansible(without Vagrant)  add `hosts.yml` too.
 
 ## Usage
