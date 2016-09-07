@@ -30,7 +30,7 @@ I validated this repository in the following environment.
 ||CI Tool|Jenkins ver.2.19||
 
 Note!
-- *1: The Box of Vagrant is [geerlingguy/centos6](https://atlas.hashicorp.com/geerlingguy/boxes/centos6). Change your environment box in `conf-vbox-guestvm.yml` if you want to use your box.
+- *1: The Box of Vagrant is [geerlingguy/centos6](https://atlas.hashicorp.com/geerlingguy/boxes/centos6) in atlas.hashicorp.com. Change your environment box in `conf-vbox-guestvm.yml` if you want to use your box.
 - *2: Change your environment, `conf-vbox-guestvm.yml` and `/etc/hosts`.
 And then, if you only use Ansible(without Vagrant)  add `hosts.yml` too.
 
