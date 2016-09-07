@@ -19,17 +19,19 @@ I validated this repository in the following environment.
 ||Hypervisor|Virtualbox5.14||
 ||building tool|Vagrant1.8.5||
 |||Ansible 2.1.0 update:2016/04/20|Because I use the yumrepository module, version 2.10 or more of Ansible are necessary.|
-|Gitlab and Mattermost Server|OS|CentOS6.8||
-||Host name|mygitlab|Change your environment(*1)|
-||IPaddress|192.168.33.131|Change your environment(*1)|
+|Gitlab and Mattermost Server|OS|CentOS6.8|The Box of Vagrant is [geerlingguy/centos6](https://atlas.hashicorp.com/geerlingguy/boxes/centos6)(*1)|
+||Host name|mygitlab|Change your environment(*2)|
+||IPaddress|192.168.33.131|Change your environment(*2)|
 ||Code managemnt tool|GitlabCE ver.8.11.2||
 ||Chat tool|Mattermost ver.3.30|on GitlabCE|
-|Jenkins2 Server|OS|CentOS6.8||
-||Host name|myjenkins|Change your environment(*1)|
-||IPaddress|192.168.33.132|Change your environment(*1)|
+|Jenkins2 Server|OS|CentOS6.8|The Box of Vagrant is [geerlingguy/centos6](https://atlas.hashicorp.com/geerlingguy/boxes/centos6)(*1)|
+||Host name|myjenkins|Change your environment(*2)|
+||IPaddress|192.168.33.132|Change your environment(*2)|
 ||CI Tool|Jenkins ver.2.19||
 
-*1: Change your environment, `conf-vbox-guestvm.yml` and `/etc/hosts`.
+Note!
+- *1: The Box of Vagrant is [geerlingguy/centos6](https://atlas.hashicorp.com/geerlingguy/boxes/centos6). Change your environment box in `conf-vbox-guestvm.yml` if you want to use your box.
+- *2: Change your environment, `conf-vbox-guestvm.yml` and `/etc/hosts`.
 And then, if you only use Ansible(without Vagrant)  add `hosts.yml` too.
 
 ## Usage
