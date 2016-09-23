@@ -35,21 +35,34 @@ Note!
 And then, if you only use Ansible(without Vagrant)  add `hosts.yml` too.
 
 ## Usage
-If you use Vagrant with Virtualbox and Ansible(higher ver.2.1 ),
-You only type to following in commands.
-
-Add hosts for these servers. 
-Example `sudo vi /etc/hosts`
-
+You must set name resolve of these servers.
 ```
 192.168.33.131  mygitlab
 192.168.33.132  myjenkins
 ```
+
+For example,
+You add it to the hosts file on the HOST server.
+`sudo vi /etc/hosts`
 
 And then,
 
 ```
 git clone https://github.com/tbuchi888/vagrant-ansible-gitlab-mattermost-jenkins-for-chatops.git
 cd vagrant-ansible-gitlab-mattermost-jenkins-for-chatops
+```
+
+If you use Vagrant with Virtualbox and Ansible(higher ver.2.1 ),
+You only type to following in commands.
+
+```
 vagrant up
+```
+
+If you only want to use Ansible without Vagrant,
+You only type to following in commands.
+
+```
+ansible-playbook -i hosts.yml -l gitlab install_gitlab_mattermost_without_proxy.yml -v
+ansible-playbook -i hosts.yml -l jenkins install_jenkins_without_proxy.yml -v
 ```
