@@ -59,6 +59,8 @@ You only type to following in commands.
 vagrant up
 ```
 
+Or,
+
 If you only want to use Ansible without Vagrant,
 You only type to following in commands.
 
