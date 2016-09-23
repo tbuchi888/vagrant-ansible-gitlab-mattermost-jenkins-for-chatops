@@ -1,6 +1,6 @@
 ---
 # Please use the OS of centOS6 and RHEL6. Also, please use in an environment that does not care about the HTTP_PROXY.
-# yumrepo module you can use in Ansible version 2.1 or higher. 
+# yum_repository module you can use in Ansible version 2.1 or higher. 
 # In the case of Ansible version 2.0 or less, and then comment out the yumrepo block, 
 # please remove the comment "download jenkins.repo" and "rpm import jenkins-ci.org.key".
 
