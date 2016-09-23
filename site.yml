@@ -1,3 +1,0 @@
----
-- include: install_gitlab_mattermost_without_proxy.yml
-- include: install_jenkins_without_proxy.yml
